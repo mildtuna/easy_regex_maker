@@ -1,0 +1,78 @@
+
+<script>
+
+var re = (function(){
+
+    'use strict';
+    var _INFINITE = Infinity;
+
+    var _render = function(){
+        'use strict';
+        var that = this;
+        return RegExp(that.value);
+    }
+
+    var _repeat = function(above, below){
+            'use strict';
+
+            var that = this;
+
+            // above 
+            if((!Number.isInteger(above)) && (above < 0))  
+                return 'First parameter needs be a integer and a positive number.';
+
+            //below
+            if(below === undefined){
+                that.value = that.value + '{' + above + '}';
+
+            }else if(below === _INFINITE){
+                that.value = that.value + '{' + above + ',}';
+
+            }else if(Number.isInteger(below) && (below >= 0)){
+                that.value = that.value + '{' + above + ','+ below+ '}';
+            }else
+                return 'Second parameter needs be a integer and a positive number, Or Infinity.';
+
+            return {
+                value: that.value,
+                render: _render
+            }
+    }
+
+
+
+    var _ANY = {
+        value : '\.',
+        repeat: _repeat,
+        render: _render
+    };
+
+    var _ALPHA = {
+        value : '[a-zA-Z]',
+        repeat: _repeat,
+        render: _render
+    }
+
+    
+
+
+    return {
+        INFINITE : _INFINITE,
+        ANY : _ANY,
+        ALPHA : _ALPHA,
+        repeat : _repeat,
+        render: _render,
+    }
+
+}());
+
+
+var patt = re.ALPHA.repeat(3,5).render();
+var str = '1234aSEheejk256';
+console.log(str.match(patt));
+
+
+
+var BREAK_POINT = 0;
+
+</script>
