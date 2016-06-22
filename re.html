@@ -1,7 +1,6 @@
 
 <script>
 
-
 var re = (function () {
     'use strict';
 
@@ -48,11 +47,11 @@ var re = (function () {
 
         return that;
     };
-    REObj.prototype.above  = function(value) { return this.repeat(value, re_wrapper.INF); };
-    REObj.prototype.above_one  = function() { return this.above(1); };
-    REObj.prototype.above_zero = function() { return this.above(0); };
-    REObj.prototype.zero_one   = function() { return this.repeat(0, 1); };
-    REObj.prototype.valueOf = function() { return this.value; };
+    REObj.prototype.above       = function(value) { return this.repeat(value, re_wrapper.INF); };
+    REObj.prototype.above_one   = function() { return this.above(1); };
+    REObj.prototype.above_zero  = function() { return this.above(0); };
+    REObj.prototype.zero_one    = function() { return this.repeat(0, 1); };
+    REObj.prototype.valueOf     = function() { return this.value; };
     // end of REObj class
 
 
@@ -61,20 +60,38 @@ var re = (function () {
         'use strict';
         return new REObj(arguments);
     };
-    re_wrapper.INF         = Infinity;
-    re_wrapper.ANY         = re_wrapper('\.');
-    re_wrapper.ALPHA       = re_wrapper('[a-zA-Z]');
-    re_wrapper.LOWER_ALPHA = re_wrapper('[a-z]');
-    re_wrapper.UPPER_ALPHA = re_wrapper('[A-Z]');
-    re_wrapper.DIGIT       = re_wrapper('\\d');
-    re_wrapper.NON_DIGIT   = re_wrapper('\\D');
-    re_wrapper.BLANK       = re_wrapper('[\s\t]');
+
+    re_wrapper.INF                  = Infinity;
+    re_wrapper.ANY                  = re_wrapper('.');
+    re_wrapper.ALPHA                = re_wrapper('[a-zA-Z]');
+    re_wrapper.LOWER_ALPHA          = re_wrapper('[a-z]');
+    re_wrapper.UPPER_ALPHA          = re_wrapper('[A-Z]');
+    re_wrapper.DIGIT                = re_wrapper('\\d');
+    re_wrapper.NON_DIGIT            = re_wrapper('\\D');
+    re_wrapper.BLANK                = re_wrapper('[\s\t]');
+    re_wrapper.DOT                  = re_wrapper('\\.');              
+    re_wrapper.CARET                = re_wrapper('\\^');              
+    re_wrapper.DOLLAR_SIGN          = re_wrapper('\\$');              
+    re_wrapper.BACK_SLASH           = re_wrapper('\\\\');              
+    re_wrapper.SLASH                = re_wrapper('\\/');              
+    re_wrapper.PLUS                 = re_wrapper('\\+');              
+    re_wrapper.ASTERRISK            = re_wrapper('\\*');              
+    re_wrapper.QUESTION_MARK        = re_wrapper('\\?');              
+    re_wrapper.OPEN_PARENTHESIS     = re_wrapper('\\(');              
+    re_wrapper.CLOSE_PARENTHESIS    = re_wrapper('\\)');              
+    re_wrapper.OPEN_BRACKET         = re_wrapper('\\[');              
+    re_wrapper.CLOSE_BRACKET        = re_wrapper('\\]');              
+    re_wrapper.PIPE                 = re_wrapper('\\|');              
 
     // we use re_wrapper
     return re_wrapper;
 }());
 
-console.log(re('.*abc').render());
+console.log(re('a').render());
 console.log(re(re.ALPHA.repeat(3, 5), re('hello'), re.ANY.above_one()).render());
+
+var patt = re.^.render();
+var str = ' ^  ';
+console.log(str.match(patt));
 
 </script>
